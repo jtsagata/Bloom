@@ -1,0 +1,126 @@
+/*!
+\file CMakeLists.dox
+\brief Συστημα building and Configuration.
+\page page1 Συστημα building and Configuration
+\tableofcontents
+The *cmake* is used for configuration, *ninja* for building and *clang*++ for compiling.
+
+> cmake -G Ninja -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_BUILD_TYPE=Debug
+
+\section sec1 The main 'CMakeLists.txt' file
+\include "../CMakeLists.txt"
+
+\section subsection1 The 'src/CMakeLists.txt' file
+\include "../src/CMakeLists.txt"
+
+\page page2 Example interactive program running.
+
+```
+Welcome to bshell, an interactive scripted bloom filter demo
+Type !help to see the available connands.
+
+$ !help
+Commands:
+   !help	Help about commands
+   !history	Show the historyFile
+   !exit	Exit program
+   !quit	Exit program
+   !verbose	Set verbose mode
+   !init	(Re)Initialize Bloom filter
+   !design	Design Bloom filter
+   !stats	Bloom filter statistics
+   !add		Add words to bloom filter
+   !bits	Show bloom filter bits
+   !import	Import words from files
+   !check	Check words
+   !nbits	Debug mixer
+   !run		 Run script
+
+$ !stats
+   Bits   : 60
+   Memory : 60B
+   Hashes : 10
+Num items : 0
+ Fullness : 0%
+False Pos ~ 0
+
+$ !bits
+000000000000000000000000000000000000000000000000000000000000
+$ !nbits Linux
+Linux	: 49 30 57 24 30 49 16 32 41 59
+
+$ !add Linux
+added 'Linux'
+
+$ !bits
+000000000000000010000000100000101000000001000000010000000101
+
+$ !stats
+   Bits   : 60
+   Memory : 60B
+   Hashes : 10
+Num items : 1
+ Fullness : 13,3333%
+False Pos ~ 7,27111e-09
+$ !check Love and Linux
+Positives: 'Linux'
+$ Love and Linux
+Positives: 'Linux'
+
+
+$ !history
+   0: !check the hacker and the  hasker
+   1: !stats
+   2: !quit
+   3: !help
+   4: !stats
+   5: !bits
+   6: !nbits Linux
+   7: !add Linux
+   8: !bits
+   9: !stats
+  10: !check Love and Linux
+  11: !history
+
+$ !import ../data/cia_words.txt
+Importing words form ../data/cia_words.txt.
+added 'Osama'
+added '17N'
+added 'hacker'
+added 'linux'
+added 'Kufontinas'
+added 'Κουφοντίνας'
+added 'Οσάμα'
+added 'Αναρχία'
+added 'Επανάσταση'
+added 'revolution'
+added 'Linux'
+added 'Γιαούρτι'
+   Bits   : 60
+   Memory : 60B
+   Hashes : 10
+Num items : 24
+ Fullness : 88,3333%
+False Pos ~ 0,831225
+
+$ !check the hacker and the  hasker
+Positives: 'the','hacker','the','hasker'
+
+$ !design 1000 0.001
+   Bits   : 14378
+   Memory : 14KB
+   Hashes : 10
+Num items : 0
+ Fullness : 0%
+False Pos ~ 0
+$ !verbose off
+Verbose mode: OFF
+$ !import ../data/cia_words.txt
+$ !check the hacker and the  hasker
+Positives: 'hacker'
+$ !quit
+Total run time 36,688 ms.
+
+
+```
+*/

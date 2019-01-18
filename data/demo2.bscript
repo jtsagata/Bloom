@@ -1,0 +1,8 @@
+Is there life after revolution?
+!stats
+!train ../data/cia_words.txt
+!stats
+Is there life after revolution  ?
+Omama Bill Laden
+Love Linux!
+!quit
